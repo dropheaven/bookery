@@ -3,7 +3,7 @@
 <% @books.each do |book| %>
   <p>
     Title: <%= link_to book.title, book_path(book) %><br />
-    Author: <%= link_to book.author.first_name, author_path(book.author) %><br />
+    Author: <%= link_to book.author.full_name, author_path(book.author) %><br />
     Genre: <%= link_to book.genre.name, books_path %><br />
     Release date: <%= book.release_date %><br />
   </p>
