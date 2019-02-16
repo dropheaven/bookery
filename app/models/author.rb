@@ -1,6 +1,6 @@
 class Author < ActiveRecord::Base
   has_many :books
-  has_many :genres, through: :books
+  has_many :genres, -> { distinct }, through: :books
 
   validates :first_name, presence: true, uniqueness: { scope: [:middle_name, :last_name], message: "Author already exists" }
   validates :last_name, presence: true
