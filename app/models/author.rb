@@ -1,4 +1,12 @@
 class Author < ActiveRecord::Base
   has_many :books
   has_many :genres, through: :books
+
+  def full_name
+    if middle_name != nil
+      first_name + " " + middle_name + " " + last_name
+    else
+      first_name + " " + last_name
+    end
+  end
 end
