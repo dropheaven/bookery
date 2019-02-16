@@ -2,6 +2,13 @@ class Book < ActiveRecord::Base
   belongs_to :author
   belongs_to :genre
 
+  validates :title, presence: true, uniqueness: true
+  validates :release_date, presence: true
+
+  before_validation :make_title_case
+
+
+
   def genre_name=(name)
     genre = Genre.find_or_create_by(name: name)
     self.genre = genre
@@ -19,4 +26,16 @@ class Book < ActiveRecord::Base
   def author_full_name
     self.author ? self.author.full_name : nil 
   end
+
+  private
+	  def is_title_case
+	    if title.split.any?{|w|w[0].upcase != w[0]}
+		  errors.add(:title, "Title must be in title case")
+		 end
+	   end
+   
+    def make_title_case
+      # downcase first to avoid cases like "whaT IS this".titlecase => "Wha T Is This"
+	    self.title = self.title.downcase.titlecase
+    end
 end
