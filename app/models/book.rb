@@ -2,12 +2,9 @@ class Book < ActiveRecord::Base
   belongs_to :author
   belongs_to :genre
 
+  before_validation :make_title_case
   validates :title, presence: true, uniqueness: true
   validates :release_date, presence: true
-
-  before_validation :make_title_case
-
-
 
   def genre_name=(name)
     genre = Genre.find_or_create_by(name: name)
