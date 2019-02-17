@@ -1,3 +1,6 @@
 Rails.application.routes.draw do
-  resources :authors, :books
+  root 'books#index'
+  resources :authors, except: :show do
+    resources :books
+  end
 end
