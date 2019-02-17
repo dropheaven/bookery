@@ -3,7 +3,7 @@ class Book < ActiveRecord::Base
   belongs_to :genre
 
   before_validation :make_title_case
-  validates :title, presence: true, uniqueness: true
+  validates :title, presence: true, uniqueness: { scope: :author, message: "already exists" }
   validates :release_date, presence: true
 
   def genre_name=(name)
