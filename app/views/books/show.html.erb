@@ -4,7 +4,3 @@
   Genre: <%= @book.genre.name %><br />
   Release date: <%= @book.release_date %><br />
 </p>
-
-<p>
-  <%= link_to "Delete", @book, method: :delete, data: { confirm: "Are you sure?" } %>
-</p>

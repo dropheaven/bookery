@@ -1,10 +1,16 @@
-<h3>ALL BOOKS</h3>
+<h3>
+  <% if params[:author_id] %>
+    Books by <%= Author.find(params[:author_id]).full_name %>
+  <% else %>
+    Home  
+  <% end %>
+</h3>
 
 <% @books.each do |book| %>
   <p>
-    Title: <%= link_to book.title, book_path(book) %><br />
-    Author: <%= link_to book.author.full_name, author_path(book.author) %><br />
-    Genre: <%= link_to book.genre.name, books_path %><br />
+    Title: <%= link_to book.title, author_book_path(book.author, book) %><br />
+    Author: <%= link_to book.author.full_name, author_books_path(book.author) %><br />
+    Genre: <%= link_to book.genre.name, root_path %><br />
     Release date: <%= book.release_date %><br />
   </p>
 <% end %>

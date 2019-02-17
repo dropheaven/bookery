@@ -2,14 +2,19 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   def index
-    @books = Book.all
+    # raise params.inspect
+    if params[:author_id]
+      @books = Author.find(params[:author_id]).books
+    else
+      @books = Book.all
+    end
   end
 
   def show
   end
 
   def new
-    @book = Book.new
+    @book = Book.new(author_id: params[:author_id])
   end
 
   def create
@@ -18,7 +23,7 @@ class BooksController < ApplicationController
 
     if @book.valid?
       @book.save
-      redirect_to book_path(@book)
+      redirect_to author_book_path(Author.find(params[:book][:author_id]), @book)
     else
       render :new
     end
@@ -29,7 +34,7 @@ class BooksController < ApplicationController
 
   def update
     if @book.update(book_params)
-      redirect_to book_path(@book)
+      redirect_to author_book_path(Author.find(params[:book][:author_id]), @book)
     else
       render :edit
     end
