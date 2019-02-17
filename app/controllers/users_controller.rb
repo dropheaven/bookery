@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    raise params.inspect
+    # raise params.inspect
     @user = User.new(user_params)
 
     if @user.save
@@ -25,6 +25,11 @@ class UsersController < ApplicationController
   end
 
   def update
+    if @user.update(user_params)
+      redirect_to user_path(@user)
+    else
+      render :edit 
+    end
   end
 
   def destroy
