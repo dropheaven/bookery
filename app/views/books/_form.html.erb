@@ -3,7 +3,7 @@
     <div id="error_explanation">
       <h3><%= pluralize(@book.errors.count, "error") %> prohibited this article from being saved</h3>
       <ul>
-        <% @book.errors.each do |message| %>
+        <% @book.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
@@ -14,15 +14,15 @@
     <%= f.label :title %>
     <%= f.text_field :title %>
   </div>
-
+  
   <div class="field">
     <%= f.label :author %>
-    <%= f.collection_select :author, Author.all, :id, :full_name %>
+    <%= f.collection_select :author_id, Author.all, :id, :full_name %>
   </div>
 
   <div class="field">
     <%= f.label :genre %>
-    <%= f.collection_select :genre_name, Genre.all, :id, :name %>
+    <%= f.collection_select :genre_id, Genre.all, :id, :name %>
   </div>
 
   <div class="field">
