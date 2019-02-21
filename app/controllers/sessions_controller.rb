@@ -3,14 +3,23 @@ class SessionsController < ApplicationController
   end
 
   def create
-    # raise params.inspect
-    user = User.find_by(username: params[:session][:username])
-    if user && user.authenticate(params[:session][:password])
+    if auth
+      user = User.find_or_create_by(email: auth["info"]["email"]) do |u|
+        u.email = auth["info"]["email"]
+        u.username = auth["info"]["name"]
+        u.password = SecureRandom.hex
+      end
       log_in(user)
-      redirect_to user_path(user)
+      redirect_to user
     else
-      flash.now[:danger] = 'Invalid email/password combination'
-      render :new
+      user = User.find_by(username: params[:session][:username])
+      if user && user.authenticate(params[:session][:password])
+        log_in(user)
+        redirect_to user
+      else
+        flash.now[:danger] = 'Invalid email/password combination'
+        render :new
+      end
     end
   end
 
@@ -23,5 +32,9 @@ class SessionsController < ApplicationController
   private
     def session_params
       params.permit(:username, :password)
+    end
+
+    def auth
+      request.env['omniauth.auth']
     end
 end

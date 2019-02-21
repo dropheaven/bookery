@@ -7,10 +7,7 @@
 
   <p>Not a member? <%= link_to "Register", new_user_path %></p>
 
-  <p>or sign in with: </p>
-  <a type="button" class="light-blue-text mx-2">
-    <i class="fab fa-github"></i>
-  </a>
+  <p>or sign in with: <%= link_to "Github", "/auth/github" %></p>
 <% end %>
 
 
