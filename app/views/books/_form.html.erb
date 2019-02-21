@@ -11,28 +11,10 @@
   <% end %>
 
   <%= f.hidden_field :author_id %>
+  <%= f.text_field :title, class: "form-control md-4", placeholder: "Title" %>
+  <%= f.collection_select :author_id, Author.all, :id, :full_name, {}, class: "form-control md-4" %>
+  <%= f.collection_select :genre_id, Genre.all, :id, :name, {}, class: "form-control md-4" %>
+  <%= f.text_field :release_date, type: "date", class: "form-control md-4" %>
 
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :author %>
-    <%= f.collection_select :author_id, Author.all, :id, :full_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :genre %>
-    <%= f.collection_select :genre_id, Genre.all, :id, :name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :release_date %>
-    <%= f.text_field :release_date, type: "date" %>
-  </div>
-
-  <div class="action">
-    <%= f.submit %>  
-  </div>
+  <%= f.submit "Add book", class: "btn btn-info btn-block my-4" %>
 <% end %>
