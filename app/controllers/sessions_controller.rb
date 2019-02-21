@@ -10,11 +10,13 @@ class SessionsController < ApplicationController
         u.password = SecureRandom.hex
       end
       log_in(user)
+      flash[:success] = "Logged in as #{user.username}"
       redirect_to user
     else
       user = User.find_by(username: params[:session][:username])
       if user && user.authenticate(params[:session][:password])
         log_in(user)
+        flash[:success] = "Logged in as #{user.username}"
         redirect_to user
       else
         flash.now[:danger] = 'Invalid email/password combination'
