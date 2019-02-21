@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
+  has_many :comments
+  has_many :books, -> { distinct }, through: :comments
 
   validates :username, presence: true, length: { in: 2..20 }, uniqueness: { case_sensitive: false }
   validates :email, presence: true, length: { maximum: 255 }, uniqueness: { case_sensitive: false }, 

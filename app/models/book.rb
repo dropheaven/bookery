@@ -1,6 +1,8 @@
-class Book < ActiveRecord::Base
+class Book < ApplicationRecord
   belongs_to :author
   belongs_to :genre
+  has_many :comments
+  has_many :users, -> { distinct }, through: :comments
 
   before_validation :make_title_case
   validates :title, presence: true, uniqueness: { scope: :author, message: "already exists" }
