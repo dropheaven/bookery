@@ -18,6 +18,7 @@ class UsersController < ApplicationController
       log_in @user
       redirect_to user_path(@user)
     else
+      flash.now[:danger] = "There was a problem with your entry"
       render :new
     end
   end
