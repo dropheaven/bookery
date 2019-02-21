@@ -14,7 +14,12 @@ class BooksController < ApplicationController
   end
 
   def new
-    @book = Book.new(author_id: params[:author_id])
+    if logged_in?
+      @book = Book.new(author_id: params[:author_id])
+    else
+      flash[:danger] = "Must be logged in to add book"
+      redirect_to root_path
+    end
   end
 
   def create
