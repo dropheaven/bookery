@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
 
     if comment.save
       flash[:success] = "Comment posted!"
-      redirect_to author_book_path(book.author , book)
+      redirect_to author_book_path(book.author, book)
     end
   end
 
