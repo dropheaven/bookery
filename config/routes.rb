@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/auth/github/callback', to: 'sessions#create'
 
   resources :users
+  resources :comments, only: :create
 
   resources :books, only: [:new, :create, :update, :destroy]
   resources :authors, except: :show do
