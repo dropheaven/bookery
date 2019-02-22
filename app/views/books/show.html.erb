@@ -4,3 +4,17 @@
   Genre: <%= @book.genre.name %><br />
   Release date: <%= @book.release_date %><br />
 </p>
+
+<div>
+  <% @book.comments.each do |comment| %>
+    <p><%= comment.content %></p><span><%= comment.user.username %></span>
+  <% end %>
+</div>
+
+<h4>Add a new comment:</h4>
+<%= form_for @book.comments.build do |f| %>
+  <%= f.hidden_field :id, value: @book.id %>
+  <%= f.label :content %>
+  <%= f.text_area :content %>
+  <%= f.submit %>
+<% end %>
