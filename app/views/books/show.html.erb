@@ -1,20 +1,24 @@
-<p>
-  Title: <%= @book.title %><br />
-  Author: <%= @book.author.full_name %><br />
-  Genre: <%= @book.genre.name %><br />
-  Release date: <%= @book.release_date %><br />
-</p>
+<div class="container">
+  <%= image_tag "hunter-newton.jpg", class: "img-thumbnail float-left", alt: "hunter-newton" %>
+  <h2><%= @book.title %></h2>
+  <h5>by <%= @book.author.full_name %></h5>
+  <p id="pushdown">
+    Genre: <%= @book.genre.name %><br>
+    Release date: <%= @book.release_date %>
+  </p>
 
-<div>
-  <% @book.comments.each do |comment| %>
-    <p><%= comment.content %></p><span><%= comment.user.username %></span>
+  <div>
+    <% @book.comments.each do |comment| %>
+      <p><%= comment.content %></p><span><%= comment.user.username %></span>
+    <% end %>
+  </div>
+
+  <h4>Add a new comment:</h4>
+  <%= form_for @book.comments.build do |f| %>
+    <%= f.hidden_field :id, value: @book.id %>
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+    <%= f.submit %>
   <% end %>
 </div>
 
-<h4>Add a new comment:</h4>
-<%= form_for @book.comments.build do |f| %>
-  <%= f.hidden_field :id, value: @book.id %>
-  <%= f.label :content %>
-  <%= f.text_area :content %>
-  <%= f.submit %>
-<% end %>

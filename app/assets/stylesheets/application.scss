@@ -13,3 +13,13 @@
  */
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
+
+/* books#index */
+.img-thumbnail {
+  max-width: 200px;
+  margin-right: 20px;
+}
+
+#pushdown {
+  margin-bottom: 200px;
+}
