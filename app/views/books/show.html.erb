@@ -26,8 +26,8 @@
     <div>
       <%= form_for @book.comments.build do |f| %>
         <%= f.hidden_field :id, value: @book.id %>
-        <%= f.text_area :content %>
-        <%= f.submit "Add comment" %>
+        <%= f.text_area :content, class: "form-control" %>
+        <%= f.submit "Add comment", class: "btn btn-info btn-block my-4" %>
       <% end %>
     </div>
   </div>
