@@ -18,6 +18,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <% if logged_in? %>
+                <%= link_to "hi, #{current_user.username}", user_path(current_user), class: "nav-link" %> 
+              <% end %>  
+            </li>
             <% if logged_in? %>
               <li class="nav-item">
                 <% if author = Author.find_by(id: params[:author_id]) %>
@@ -27,7 +32,7 @@
                 <% end %>
               </li>
             <% end %>
-            <li class="nav-item">
+             <li class="nav-item">
               <%= link_to "Home", root_path, class: "nav-link"%>
             </li>
             <li class="nav-item">
