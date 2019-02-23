@@ -20,7 +20,11 @@
           <ul class="navbar-nav ml-auto">
             <% if logged_in? %>
               <li class="nav-item">
-                <%= link_to "Add Book", new_book_path, class: "nav-link" %>
+                <% if author = Author.find_by(id: params[:author_id]) %>
+                  <%= link_to "Add Book", new_author_book_path(author), class: "nav-link" %>
+                <% else %>
+                  <%= link_to "Add Book", new_book_path, class: "nav-link" %>
+                <% end %>
               </li>
             <% end %>
             <li class="nav-item">
