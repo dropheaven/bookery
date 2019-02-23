@@ -1,4 +1,5 @@
 <div class="container">
+
   <%= image_tag "hunter-newton.jpg", class: "img-thumbnail float-left", alt: "hunter-newton" %>
   <h2><%= @book.title %></h2>
   <h5>by <%= @book.author.full_name %></h5>
@@ -7,18 +8,28 @@
     Release date: <%= @book.release_date %>
   </p>
 
-  <div>
-    <% @book.comments.each do |comment| %>
-      <p><%= comment.content %></p><span><%= comment.user.username %></span>
+  <div class="border border-dark p-5" id="comments-section">
+    <h5 class="text-center">Discussion Box</h5>
+    <% @book.comments.each_with_index do |comment, idx| %>
+      <% if idx.even? %>
+        <div class="card border-danger md-3" id="comment-card">
+      <% else %>
+        <div class="card border-info md-3" id="comment-card">
+      <% end %>
+          <div class="card-body">
+            <p class="card-title font-italic"><%= comment.user.username %> says:</p>
+            <p class="card-text"><%= comment.content%></p>
+          </div>
+        </div>
     <% end %>
-  </div>
 
-  <h4>Add a new comment:</h4>
-  <%= form_for @book.comments.build do |f| %>
-    <%= f.hidden_field :id, value: @book.id %>
-    <%= f.label :content %>
-    <%= f.text_area :content %>
-    <%= f.submit %>
-  <% end %>
+    <div>
+      <%= form_for @book.comments.build do |f| %>
+        <%= f.hidden_field :id, value: @book.id %>
+        <%= f.text_area :content %>
+        <%= f.submit "Add comment" %>
+      <% end %>
+    </div>
+  </div>
 </div>
 
