@@ -1,4 +1,4 @@
-<h3 class="text-center">
+<h3 class="heading">
   <% if params[:author_id] %>
     Books by <%= Author.find(params[:author_id]).full_name %>
   <% else %>
@@ -6,26 +6,17 @@
   <% end %>
 </h3>
 
-<div class="row">
+<div class="container">
   <% @books.each do |book| %>
-    <div class="col-sm-6">
-      <div class="card text-center border-secondary mb-3">
-        <div class="card-body">
-          <h5 class="card-title"><%= link_to book.title, author_book_path(book.author, book) %></h5>
-          <p class="card-text">
-            Author: <%= link_to book.author.full_name, author_books_path(book.author) %><br />
-            Genre: <%= link_to book.genre.name, root_path %><br />
-            Release date: <%= book.release_date %><br />
-          </p>
-        </div>
-      </div>
+    <div class="book-content">
+      <h3><%= link_to book.title, author_book_path(book.author, book) %></h5>
+      <p>
+        Author: <%= link_to book.author.full_name, author_books_path(book.author) %><br />
+        Genre: <%= link_to book.genre.name, root_path %><br />
+        Release date: <%= link_to book.release_date, root_path %><br />
+      </p>
     </div>
   <% end %>
 </div>
-
-
-
-
-
 
 
