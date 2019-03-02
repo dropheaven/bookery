@@ -1,36 +1,29 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3">
-  <div class="container">
-    <%= link_to "Bookery", root_path, class: "navbar-brand" %>
-    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <% if logged_in? %>
-            <%= link_to "hi, #{current_user.username}", user_path(current_user), class: "nav-link" %> 
-          <% end %>  
-        </li>
-        <% if logged_in? %>
-          <li class="nav-item">
-            <% if author = Author.find_by(id: params[:author_id]) %>
-              <%= link_to "Add Book", new_author_book_path(author), class: "nav-link" %>
-            <% else %>
-              <%= link_to "Add Book", new_book_path, class: "nav-link" %>
-            <% end %>
-          </li>
+<nav id="navbar">
+  <h1 id="logo"><%= link_to "Bookery", root_path %></h1>
+  <ul>
+    <% if logged_in? %>
+      <li class="nav-item">
+        <%= link_to "hi, #{current_user.username}", user_path(current_user) %> 
+      </li>
+    <% end %>  
+    <% if logged_in? %>
+      <li class="nav-item">
+        <% if author = Author.find_by(id: params[:author_id]) %>
+          <%= link_to "Add Book", new_author_book_path(author) %>
+        <% else %>
+          <%= link_to "Add Book", new_book_path %>
         <% end %>
-        <li class="nav-item">
-          <%= link_to "Home", root_path, class: "nav-link"%>
-        </li>
-        <li class="nav-item">
-          <% if logged_in? %>
-            <%= link_to "Sign Out", logout_path, method: :delete, class: "nav-link" %> 
-          <% else %>
-            <%= link_to "Sign In", login_path, class: "nav-link" %>
-          <% end %>  
-        </li>
-      </ul>
-    </div>
-  </div>
+      </li>
+    <% end %>
+    <li class="nav-item">
+      <%= link_to "Home", root_path %>
+    </li>
+    <li class="nav-item">
+      <% if logged_in? %>
+        <%= link_to "Sign Out", logout_path, method: :delete %> 
+      <% else %>
+        <%= link_to "Sign In", login_path %>
+      <% end %>  
+    </li>
+  </ul>
 </nav>
