@@ -1,10 +1,9 @@
 Specs:
 
- [x] Using Ruby on Rails for the project =>  Used Rails 5.2.2
- [x] Include at least one has_many relationship (x has_many y; e.g. User has_many Recipes)
-Author has many books, Genre has many books
+ [x] Using Ruby on Rails for the project: => Used Rails 5.2.2
+ [x] Include at least one has_many relationship (x has_many y; e.g. User has_many Recipes):             => Author has many books, Genre has many books
  [x] Include at least one belongs_to relationship (x belongs_to y; e.g. Post belongs_to User)
-  => Book belongs to an author & genre
+      => Book belongs to an author & genre
  [x] Include at least two has_many through relationships (x has_many y through z; e.g. Recipe has_many Items through Ingredients) => author has many genres through books, genre has many authors through book
 
  [x] Include at least one many-to-many relationship (x has_many y through z, y has_many x through z; e.g. Recipe has_many Items through Ingredients, Item has_many Recipes through Ingredients)
@@ -12,7 +11,7 @@ Author has many books, Genre has many books
  
  [x] Include reasonable validations for simple model objects (list of model objects with validations e.g. User, Recipe, Ingredient, Item) =>  Book, Author, Genre, Comment
 
- [] Include a class level ActiveRecord scope method (model object & class method name and URL to 
+ [o] Include a class level ActiveRecord scope method (model object & class method name and URL to 
  see the working feature e.g. User.most_recipes URL: /users/most_recipes) =>
 
  [x] Include signup (how e.g. Devise)
@@ -25,6 +24,6 @@ Author has many books, Genre has many books
 
 Confirm:
  [x] The application is pretty DRY
- [] Limited logic in controllers
- [] Views use helper methods if appropriate
- [] Views use partials if appropriate
+ [o] Limited logic in controllers
+ [o] Views use helper methods if appropriate
+ [o] Views use partials if appropriate
