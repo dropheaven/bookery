@@ -1,6 +1,6 @@
-<h3 class="heading">
+<h2 class="heading">
   <% if params[:author_id] %>
-    Books by <%= Author.find(params[:author_id]).full_name %>
+    Books by <span id="author"><%= Author.find(params[:author_id]).full_name %></span> 
   <% else %>
     Home  
   <% end %>
