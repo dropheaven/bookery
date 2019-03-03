@@ -35,6 +35,21 @@ a {
   flex-flow: row wrap;
 }
 
+.btn {
+  display: inline-block;
+  font-size: 18px;
+  color: #fff;
+  background: #333;
+  padding: 13px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #BA2F3E;
+  border-radius: 5px;
+}
+
 /* Navbar */
 #navbar {
   display: flex;
@@ -90,6 +105,59 @@ a {
 
 .book-content p a {
   color: #BA2F3E;
+}
+
+/* Book Show Page */
+.show-flex {
+  display: flex;
+  margin: 10px;
+}
+
+.book-img {
+  margin: 20px;
+  width: 200px;
+}
+
+.book-info {
+  padding-top: 20px;
+}
+
+.comments-section {
+  margin: 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+.comment-red {
+  border: #BA2F3E solid 2px;
+  margin: 5px 5px;
+}
+
+.comment-black {
+  border: #3B3333 solid 2px;
+  margin: 5px 5px;
+}
+
+.username {
+  text-align: left;
+  padding-left: 5px;
+}
+
+.comment-content {
+  text-align: left;
+  padding: 5px;
+}
+
+.post-time {
+  text-align: right;
+  margin-right: 10px;
+}
+
+.comment-form textarea {
+  margin-top: 10px;
+  width: 500px;
+  height: 100px;
+  border: #3B3333 solid 3px;
 }
 
 /* Footer */
