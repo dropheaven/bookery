@@ -81,9 +81,13 @@ a {
 }
 
 /* Book Container */
-.heading {
+.current-page {
   text-align: center;
   margin: 20px;
+}
+
+.current-page h3 {
+  margin-top: 10px;
 }
 
 #author {
