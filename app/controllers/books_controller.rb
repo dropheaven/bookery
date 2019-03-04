@@ -10,6 +10,10 @@ class BooksController < ApplicationController
     end
   end
 
+  def latest
+    @books = Book.latest
+  end
+
   def show
   end
 

@@ -8,6 +8,8 @@ class Book < ApplicationRecord
   validates :title, presence: true, uniqueness: { scope: :author, message: "already exists" }
   validates :release_date, presence: true
 
+  scope :latest, -> { order("created_at desc") }
+
   def genre_name=(name)
     genre = Genre.find_or_create_by(name: name.downcase)
     self.genre = genre
