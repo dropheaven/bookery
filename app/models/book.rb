@@ -9,7 +9,7 @@ class Book < ApplicationRecord
   validates :release_date, presence: true
 
   def genre_name=(name)
-    genre = Genre.find_or_create_by(name: name)
+    genre = Genre.find_or_create_by(name: name.downcase)
     self.genre = genre
   end
 
@@ -18,7 +18,7 @@ class Book < ApplicationRecord
   end
 
   def author_full_name=(full_name)
-    author = Author.find_by(full_name: full_name)
+    author = Author.find_or_create_by(full_name: full_name)
     self.author = author
   end
 
