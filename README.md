@@ -1,4 +1,4 @@
-# Bookery
+# Bookery is a web app that gives book lovers a place to share and talk about some of the books they are reading. 
 
 ## Getting started
 
@@ -8,6 +8,12 @@ $ bundle install
 Next, migrate the database:
 $ rails db:migrate
 
-Finally, the app in a local server:
+After the database is migrated, seed the application starter data:
+$ rails db:seed
+
+then run the app in a local server:
 $ rails server
+
+Finally, open the app on:
+http://localhost:3000/
 
