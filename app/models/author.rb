@@ -2,14 +2,11 @@ class Author < ApplicationRecord
   has_many :books
   has_many :genres, -> { distinct }, through: :books
 
-  validates :first_name, presence: true, uniqueness: { scope: [:middle_name, :last_name], message: "Author already exists" }
-  validates :last_name, presence: true
+  before_validation :downcase_name
+  validates :full_name, presence: true, uniqueness: true
 
-  def full_name
-    if middle_name != nil
-      (first_name + " " + middle_name + " " + last_name).titlecase
-    else
-      (first_name + " " + last_name).titlecase
+  private
+    def downcase_name
+      full_name.downcase!
     end
-  end
 end
