@@ -4,7 +4,7 @@
   </div>
   <div class="book-info">
     <h2><%= @book.title %></h2>
-    <h5>by <%= @book.author.full_name %></h5>
+    <h5>by <%= titleize(@book.author) %></h5>
     <p id="pushdown">
       Genre: <%= @book.genre.name %><br>
       Release date: <%= @book.release_date %>
