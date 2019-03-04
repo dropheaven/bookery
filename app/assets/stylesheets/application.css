@@ -43,6 +43,7 @@ a {
   padding: 13px 20px;
   border: none;
   cursor: pointer;
+  margin-top: 15px;
 }
 
 .btn:hover {
@@ -55,7 +56,7 @@ a {
   display: flex;
   justify-content: space-between;
   padding: 1rem;
-  background: #3B3333;
+  background: #000000;
 }
 
 #navbar ul {
@@ -90,8 +91,8 @@ a {
 }
 
 .book-content {
-  border: #3B3333 solid 1px;
-  background: #ffffff;
+  border: #3B3333 solid 3px;
+  background: #F8F9F9;
   padding: 1rem;
   margin: 0.5rem;
   text-align: center;
@@ -145,6 +146,7 @@ a {
 
 .comment-content {
   text-align: left;
+  font-style: italic;
   padding: 5px;
 }
 
@@ -160,7 +162,46 @@ a {
   border: #3B3333 solid 3px;
 }
 
-/* Footer */
+/* ------------------------------------------  Form  ----------------------------------------- */
+
+.form {
+  margin: 20px auto;
+  width: 300px;
+  padding: 30px 25px;
+  background: white;
+  border: 1px solid #c4c4c4;
+}
+
+h1.form-title {
+  margin: -28px -25px 25px;
+  padding: 15px 25px;
+  line-height: 30px;
+  font-size: 25px;
+  font-weight: 300;
+  text-align:center; 
+}
+
+.form-input {
+  width: 285px;
+  height: 50px;
+  margin-bottom: 25px;
+  padding-left:10px;
+  font-size: 15px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-input:focus {
+    border-color:#6e8095;
+    outline: none;
+}
+
+.form-alt {
+  margin-top: 10px;
+}
+
+/*------------------------------------------- Footer --------------------------------------------*/
 footer {
   left: 0;
   bottom: 0;
@@ -170,7 +211,4 @@ footer {
   text-align: center;
   padding: 1rem;
 }
-
-
-
 
