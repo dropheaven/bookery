@@ -28,7 +28,7 @@ class BooksController < ApplicationController
 
     if @book.valid?
       @book.save
-      redirect_to author_book_path(Author.find(params[:book][:author_id]), @book)
+      redirect_to author_book_path(Author.find(@book.author_id), @book)
     else
       render :new
     end
@@ -52,7 +52,7 @@ class BooksController < ApplicationController
 
   private
     def book_params
-      params.require(:book).permit(:title, :release_date, :author_id, :genre_id)
+      params.require(:book).permit(:title, :release_date, :author_full_name, :genre_name)
     end
 
 #     {"utf8"=>"✓",
