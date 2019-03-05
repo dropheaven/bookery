@@ -6,7 +6,6 @@ class Book < ApplicationRecord
 
   before_validation :make_title_case
   validates :title, presence: true, uniqueness: { scope: :author, message: "already exists" }
-  validates :release_date, presence: true
 
   scope :latest, -> { order("created_at desc") }
 

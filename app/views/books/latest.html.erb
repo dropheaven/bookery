@@ -1,0 +1,12 @@
+<div class="container">
+  <% @books.each do |book| %>
+    <div class="book-content">
+      <h3><%= link_to book.title, author_book_path(book.author, book) %></h5>
+      <p>
+        Author: <%= link_to titleize(book.author), author_books_path(book.author) %><br />
+        Genre: <%= link_to book.genre.name, root_path %><br />
+        Release date: <%= link_to book.release_date, root_path %><br />
+      </p>
+    </div>
+  <% end %>
+</div>
