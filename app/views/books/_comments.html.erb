@@ -1,0 +1,23 @@
+<div class="comments-section">
+  <h3>Discussion Box</h3>
+  <% @book.comments.each_with_index do |comment, idx| %>
+    <% if idx.even? %>
+      <div class="comment-red">
+    <% else %>
+      <div class="comment-black">
+    <% end %>
+        <div class="comment-body">
+          <p class="username"><strong><%= comment.user.username %></strong></p>
+          <p class="comment-content"><%= comment.content %></p>
+          <p class="post-time"><%= posted_on(comment) %></p>
+        </div>
+      </div>
+  <% end %>
+  <div class="comment-form">
+    <%= form_for @book.comments.build do |f| %>
+      <%= f.hidden_field :id, value: @book.id %>
+      <%= f.text_area :content, class: "form-control" %><br>
+      <%= f.submit "Add comment", class: "btn" %>
+    <% end %>
+  </div>
+</div>
