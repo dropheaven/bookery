@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_to_access, only: [:new, :edit, :destroy]
 
   def index
     # raise params.inspect
@@ -18,12 +19,7 @@ class BooksController < ApplicationController
   end
 
   def new
-    if logged_in?
-      @book = Book.new(author_id: params[:author_id])
-    else
-      flash[:danger] = "Must be logged in to add book"
-      redirect_to root_path
-    end
+    @book = Book.new(author_id: params[:author_id])
   end
 
   def create
@@ -43,7 +39,8 @@ class BooksController < ApplicationController
 
   def update
     if @book.update(book_params)
-      redirect_to author_book_path(Author.find(params[:book][:author_id]), @book)
+      flash[:notice] = "Book updated!"
+      redirect_to author_book_path(@book.author, @book)
     else
       render :edit
     end
@@ -51,7 +48,8 @@ class BooksController < ApplicationController
 
   def destroy
     @book.destroy
-    redirect_to books_path
+    flash[:notice] = "Book has been deleted!"
+    redirect_to root_path
   end
 
   private
@@ -61,5 +59,12 @@ class BooksController < ApplicationController
 
     def set_book
       @book = Book.find(params[:id])
+    end
+
+    def logged_in_to_access
+      if !logged_in?
+        flash[:notice] = "Sign in to complete this request"
+        redirect_to login_path
+      end
     end
 end
