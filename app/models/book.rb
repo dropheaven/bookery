@@ -7,7 +7,7 @@ class Book < ApplicationRecord
   before_validation :make_title_case
   validates :title, presence: true, uniqueness: { scope: :author, message: "already exists" }
 
-  scope :latest, -> { order("created_at desc") }
+  scope :latest, -> { order("created_at desc").limit(1) }
 
   def genre_name=(name)
     genre = Genre.find_or_create_by(name: name.downcase)

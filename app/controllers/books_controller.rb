@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_to_access, only: [:new, :edit, :destroy]
+  before_action :signed_in_to_access, only: [:new, :edit, :destroy]
 
   def index
     # raise params.inspect
@@ -9,10 +9,6 @@ class BooksController < ApplicationController
     else
       @books = Book.all
     end
-  end
-
-  def latest
-    @books = Book.latest
   end
 
   def show
@@ -61,7 +57,7 @@ class BooksController < ApplicationController
       @book = Book.find(params[:id])
     end
 
-    def logged_in_to_access
+    def signed_in_to_access
       if !logged_in?
         flash[:notice] = "Sign in to complete this request"
         redirect_to login_path

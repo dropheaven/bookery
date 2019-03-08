@@ -4,7 +4,10 @@
       Books by <span id="author"><%= Author.find(params[:author_id]).full_name %></span> 
     <% else %>
       Home
-      <h3><%= link_to "Show New Books First", books_latest_path %></h3>
+      <h3>
+        <% book = Book.latest.first %>
+        <%= link_to "Check out latest book", author_book_path(book.author, book) %>
+      </h3>
     <% end %>
   </h2>
 </div>

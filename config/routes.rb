@@ -7,13 +7,11 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   get '/auth/github/callback', to: 'sessions#create'
 
-  get '/books/latest', to: 'books#latest'
-
   resources :users
   resources :comments, only: :create
 
+  get '/books/latest', to: 'books#latest'
   resources :books, only: [:new, :create, :update, :destroy]
-
   resources :authors, except: :show do
     resources :books
   end
