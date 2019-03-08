@@ -8,6 +8,7 @@ class BooksController < ApplicationController
       @books = Author.find(params[:author_id]).books
     else
       @books = Book.all
+      @latest_book = Book.latest.first
     end
   end
 
