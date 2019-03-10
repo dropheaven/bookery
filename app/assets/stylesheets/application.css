@@ -80,6 +80,10 @@ a {
   border-radius: 5px;
 }
 
+.alert {
+  text-align: center;
+}
+
 /* Book Container */
 .current-page {
   text-align: center;
