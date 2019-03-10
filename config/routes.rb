@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   root 'books#index'
+  resources :books, only: [:new, :create, :update, :destroy]
+  resources :authors, only: :index do
+    resources :books, only: [:index, :show, :new, :edit]
+  end
 
-  # sessions 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
@@ -9,10 +12,5 @@ Rails.application.routes.draw do
 
   resources :users
   resources :comments, only: :create
-
-  get '/books/latest', to: 'books#latest'
-  resources :books, only: [:new, :create, :update, :destroy]
-  resources :authors, except: :show do
-    resources :books
-  end
+  resources :genres, only: :show
 end
