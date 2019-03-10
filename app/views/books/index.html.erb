@@ -9,15 +9,14 @@
   </h2>
 </div>
 
-
 <div class="container">
   <% @books.each do |book| %>
     <div class="book-content">
       <h3><%= link_to book.title, author_book_path(book.author, book) %></h5>
       <p>
         Author: <%= link_to titleize(book.author), author_books_path(book.author) %><br />
-        Genre: <%= link_to book.genre.name, root_path %><br />
-        Release year: <%= link_to book.release_year, root_path %><br />
+        Genre: <%= link_to book.genre.name, genre_path(book.genre_id) %><br />
+        Release year: <%= link_to book.release_year, "#" %>
       </p>
     </div>
   <% end %>
