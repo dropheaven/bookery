@@ -9,7 +9,7 @@ patrick_rothfuss = Author.create(full_name: "Patrick Rothfuss", bio: "Patrick Ja
 
 dan_brown = Author.create(full_name: "Dan Brown", bio: "Daniel Gerhard Brown is an American author most well known for his thriller novels, including the Robert Langdon stories, Angels & Demons, The Da Vinci Code, The Lost Symbol, Inferno and Origin.")
 
-################################## GENRE #########################################
+################################## GENRES #########################################
 non_fiction = Genre.create(name: "Non fiction")
 self_dev = Genre.create(name: "Self Development")
 fantasy = Genre.create(name: "Fantasy")
