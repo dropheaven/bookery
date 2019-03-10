@@ -23,9 +23,8 @@ class BooksController < ApplicationController
     # raise params.inspect
     @book = Book.new(book_params)
 
-    if @book.valid?
-      @book.save
-      redirect_to author_book_path(Author.find(@book.author_id), @book)
+    if @book.save
+      redirect_to author_book_path(@book.author_id, @book)
     else
       render :new
     end
@@ -45,13 +44,13 @@ class BooksController < ApplicationController
 
   def destroy
     @book.destroy
-    flash[:notice] = "Book has been deleted!"
+    flash[:notice] = "#{@book.title} has been deleted!"
     redirect_to root_path
   end
 
   private
     def book_params
-      params.require(:book).permit(:title, :release_year, :author_full_name, :genre_name)
+      params.require(:book).permit(:title, :release_year, :author_name, :genre_name)
     end
 
     def set_book
