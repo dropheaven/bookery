@@ -8,6 +8,7 @@ class Book < ApplicationRecord
   validates :title, presence: true, uniqueness: { scope: :author, message: "already exists" }
 
   scope :latest, -> { order("created_at desc").limit(1) }
+  scope :alpha, -> { order("title asc") }
 
   def genre_name=(name)
     genre = Genre.find_or_create_by(name: name.downcase)
@@ -18,12 +19,12 @@ class Book < ApplicationRecord
     self.genre ? self.genre.name : nil
   end
 
-  def author_full_name=(full_name)
+  def author_name=(full_name)
     author = Author.find_or_create_by(full_name: full_name)
     self.author = author
   end
 
-  def author_full_name
+  def author_name
     self.author ? self.author.full_name : nil 
   end
 
