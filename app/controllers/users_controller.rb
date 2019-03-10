@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+
   def index
   end
 
@@ -11,12 +12,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    # raise params.inspect
     @user = User.new(user_params)
-
     if @user.save
       log_in @user
-      redirect_to user_path(@user)
+      flash[:success] = "Registered successfully. You are now logged in #{@user.username}"
+      redirect_to root_path
     else
       flash.now[:danger] = "There was a problem with your entry"
       render :new
