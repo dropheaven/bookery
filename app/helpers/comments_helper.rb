@@ -1,5 +1,5 @@
 module CommentsHelper
   def posted_on(comment)
-    comment.updated_at.strftime("Posted on %A, %b %e, at %l:%M %p")
+    comment.updated_at.strftime("%A, %b %e, at %l:%M %p")
   end
 end
