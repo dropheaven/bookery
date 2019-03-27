@@ -35,3 +35,29 @@ body {
 .form-alt {
   margin-top: 10px;
 }
+
+/* books show page */
+#book-info {
+  padding-left: 40px;
+}
+
+.row, .book-show {
+  margin-bottom: 30px;
+}
+
+.media-body {
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  margin-bottom: 5px;
+
+  span {
+    padding: 5px;
+  }
+  blockquote {
+    margin-left: 15px;
+  }
+}
+
+#comment-btn {
+  margin-bottom: 10px;
+}

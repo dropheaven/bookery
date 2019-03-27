@@ -1,23 +1,24 @@
-<div class="comments-section">
-  <h3>Discussion Box</h3>
+<ul class="list-unstyled w-75">
   <% @book.comments.each_with_index do |comment, idx| %>
-    <% if idx.even? %>
-      <div class="comment-red">
-    <% else %>
-      <div class="comment-black">
-    <% end %>
-        <div class="comment-body">
-          <p class="username"><strong><%= comment.user.username %></strong></p>
-          <p class="comment-content"><%= comment.content %></p>
-          <p class="post-time"><%= posted_on(comment) %></p>
-        </div>
+    <li class="media">
+      <img class="mr-3" src="" alt="">
+      <div class="media-body">
+        <span class="mt-0"><%= comment.user.username %></span>
+        <span class="post-time float-right"><%= posted_on(comment) %></span>
+        <blockquote><%= comment.content %></blockquote>
       </div>
+    </li>
   <% end %>
-  <div class="comment-form">
-    <%= form_for @book.comments.build do |f| %>
-      <%= f.hidden_field :id, value: @book.id %>
-      <%= f.text_area :content, placeholder: "Enter comment...", class: "form-control" %><br>
-      <%= f.submit "Add comment", class: "btn" %>
-    <% end %>
-  </div>
+</ul>
+
+
+<div class="container comment-form">
+  <%= form_for @book.comments.build do |f| %>
+    <%= f.hidden_field :id, value: @book.id %>
+    <%= f.text_area :content, placeholder: "Enter comment...", class: "form-control w-75" %><br>
+    <%= f.submit "Add comment", id: "comment-btn", class: "btn btn-primary" %>
+  <% end %>
 </div>
+
+
+
