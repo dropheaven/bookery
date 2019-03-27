@@ -17,7 +17,17 @@
 //  primary: #3292a6
 //  primary-overlay: rgba(50, 146, 166, 0.8)
 
+/* Universal */
 
 body {
   margin-top: 90px;
+}
+
+
+/* forms */
+
+.d-flex {
+  padding-top: 50px;
+  padding-bottom: 525px;
+  height: 400px;
 }
