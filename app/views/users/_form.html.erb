@@ -1,23 +1,33 @@
-<%= form_for @user, html: { class: "form" } do |f| %>
-  <h1 class="form-title">Sign up</h2>
+<div class="d-flex justify-content-center">
+  <%= form_for @user, html: { class: "w-50" } do |f| %>
+    <h1 class="display-4">Sign up</h2>
 
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h3><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved</h3>
-      <ul>
-        <% @user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h3><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved</h3>
+        <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.text_field :username, class: "form-control", placeholder: "Username" %>
     </div>
+    <div class="form-group">
+      <%= f.text_field :email, class: "form-control", placeholder: "Email" %>
+    </div>
+    <div class="form-group">
+      <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
+    </div>
+    <div class="form-group">
+      <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Confirm Password" %>
+    </div>
+
+    <%= f.submit "Sign up", class: "btn btn-primary" %>
+
+    <h6 class="form-alt">Have an account? <%= link_to "sign in", login_path %></h4>
   <% end %>
-
-  <%= f.text_field :username, class: "form-input", placeholder: "Username" %>
-  <%= f.text_field :email, class: "form-input", placeholder: "Email" %>
-  <%= f.password_field :password, class: "form-input", placeholder: "Password" %>
-  <%= f.password_field :password_confirmation, class: "form-input", placeholder: "Confirm Password" %>
-
-  <%= f.submit "Sign up", class: "btn" %>
-
-  <h4 class="form-alt">Have an account? <%= link_to "sign in", login_path %></h4>
-<% end %>
+</div>
