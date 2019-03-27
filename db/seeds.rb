@@ -37,6 +37,7 @@ dan_brown.books.create(title: "Angels & Demons", release_year: 2000, genre: thri
 dan_brown.books.create(title: "The Lost Symbol", release_year: 2009, genre: thriller)
 
 ################################## USERS #########################################
+saad = User.create(username: "saad", email: "saad@email.com", password: "password")
 maha = User.create(username: "maha", email: "maha@email.com", password: "password")
 james = User.create(username: "james", email: "james@email.com", password: "password")
 lisa = User.create(username: "lisa", email: "lisa@email.com", password: "password")
