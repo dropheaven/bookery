@@ -1,25 +1,29 @@
-<div class="current-page">
-  <h2 class="heading">
-    <% if params[:author_id] %>
-      Books by <span id="author"><%= Author.find(params[:author_id]).full_name %></span> 
-    <% else %>
-      Home
-      <h3><%= link_to "Check out the latest book", author_book_path(@latest_book.author, @latest_book) %></h3>
-    <% end %>
-  </h2>
-</div>
+    <!-- Jumbotron Header -->
+<header class="jumbotron my-4">
+  <h1 class="display-3">A Warm Welcome!</h1>
+  <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
+  <a href="#" class="btn btn-primary btn-lg">Call to action!</a>
+</header>
 
-<div class="container">
+<div class="row text-center">
   <% @books.each do |book| %>
-    <div class="book-content">
-      <h3><%= link_to book.title, author_book_path(book.author, book) %></h5>
-      <p>
-        Author: <%= link_to titleize(book.author), author_books_path(book.author) %><br />
-        Genre: <%= link_to book.genre.name, genre_path(book.genre_id) %><br />
-        Release year: <%= link_to book.release_year, "#" %>
-      </p>
+    <div class="col-lg-3 col-md-6 mb-4">
+      <div class="card h-100">
+        <%= image_tag "books/book-" + rand(1..11).to_s + ".jpg", size: "253x177", class: "card-img-top", alt: "" %>
+        <div class="card-body">
+          <h4 class="card-title"><%= book.title %></h4>
+          <p class="card-text">
+            Author: <%= link_to titleize(book.author), author_books_path(book.author) %><br />
+            Genre: <%= link_to book.genre.name, genre_path(book.genre_id) %><br />
+            Release year: <%= link_to book.release_year, "#" %>
+          </p>
+        </div>
+        <div class="card-footer">
+          <%= link_to "Details", author_book_path(book.author, book), class: "btn btn-primary" %>
+        </div>
+      </div>
     </div>
-  <% end %>
+  <% end %>  
 </div>
 
 
