@@ -1,19 +1,29 @@
-<%= form_for @book, html: { class: "form" } do |f| %>
-  <% if @book.errors.any? %>
-    <div id="error_explanation">
-      <h3><%= pluralize(@book.errors.count, "error") %> prohibited this article from being saved</h3>
-      <ul>
-        <% @book.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div class="d-flex justify-content-center">
+  <%= form_for @book, html: { class: "w-50" } do |f| %>
+    <% if @book.errors.any? %>
+      <div id="error_explanation">
+        <h3><%= pluralize(@book.errors.count, "error") %> prohibited this article from being saved</h3>
+        <ul>
+          <% @book.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    
+    <div class="form-group">
+      <%= f.text_field :title, class: "form-control", placeholder: "title", required: true %>
     </div>
+    <div class="form-group">
+      <%= f.text_field :author_name, class: "form-control", placeholder: "Author's full name", required: true %><br>
+    </div>
+    <div class="form-group">
+      <%= f.text_field :genre_name, class: "form-control", placeholder: "Genre name", required: true %><br>
+    </div>
+    <div class="form-group">
+      <%= f.text_field :release_year, class: "form-control", placeholder: "Release year", required: true %><br>
+    </div>
+    
+    <%= f.submit class: "btn btn-primary" %>
   <% end %>
-  
-  <%= f.text_field :title, class: "form-input", placeholder: "title", required: true %>
-  <%= f.text_field :author_name, class: "form-input", placeholder: "Author's full name", required: true %><br>
-  <%= f.text_field :genre_name, class: "form-input", placeholder: "Genre name", required: true %><br>
-  <%= f.text_field :release_year, class: "form-input", placeholder: "Release year", required: true %><br>
-  
-  <%= f.submit class: "btn" %>
-<% end %>
+</div>
