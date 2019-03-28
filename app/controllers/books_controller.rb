@@ -13,6 +13,7 @@ class BooksController < ApplicationController
   end
 
   def show
+    render json: @book, status: 200
   end
 
   def new
