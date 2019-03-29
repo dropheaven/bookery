@@ -13,9 +13,16 @@ class BooksController < ApplicationController
   end
 
   def show
-    respond_to do |format|
-      format.html
-      format.json { render json: @book }
+    @author = Author.find(params[:author_id])
+    
+    if @author.id != @book.author_id
+      redirect_to root_path
+      flash[:notice] = "Could not find that page!"
+    else
+      respond_to do |format|
+        format.html
+        format.json { render json: @book }
+      end
     end
   end
 
@@ -24,7 +31,6 @@ class BooksController < ApplicationController
   end
 
   def create
-    # raise params.inspect
     @book = Book.new(book_params)
 
     if @book.save
