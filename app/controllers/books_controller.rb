@@ -13,7 +13,10 @@ class BooksController < ApplicationController
   end
 
   def show
-    render json: @book, status: 200
+    respond_to do |format|
+      format.html
+      format.json { render json: @book }
+    end
   end
 
   def new
