@@ -6,11 +6,12 @@
     <h2><%= @book.title %></h2>
     <h5>by <%= titleize(@book.author) %></h5>
     <p>
-      Genre: <%= @book.genre.name %><br>
-      Release date: <%= @book.release_year %>
+      Genre: <span id="genre"><%= @book.genre.name %></span><br>
+      Release date: <span id="release"><%= @book.release_year %></span>
     </p>
     <%= link_to "Edit", edit_author_book_path(@book.author, @book), class: 'btn btn-primary' %>
-    <%= link_to "Delete", @book, method: :delete, class: 'btn btn-danger' %>
+    <%= link_to "Delete", @book, method: :delete, class: 'btn btn-danger' %><br>
+    <button data-author="<%= @book.author_id%>" data-book="<%= @book.id %>" class="btn btn-success">More books from <%= titleize(@book.author) %></button>
   </div>
 </div>
  
