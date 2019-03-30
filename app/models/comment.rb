@@ -7,4 +7,8 @@ class Comment < ApplicationRecord
   def username
     User.find(user_id).username
   end
+
+  def posted_at
+    created_at.strftime("%A, %b %e, at %l:%M %p")
+  end
 end
