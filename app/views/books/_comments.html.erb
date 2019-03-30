@@ -3,7 +3,7 @@
     <li class="media">
       <div class="media-body">
         <span class="mt-0"><%= comment.user.username %></span>
-        <span class="post-time float-right"><%= posted_on(comment) %></span>
+        <span class="post-time float-right"><%= comment.posted_at %></span>
         <blockquote><%= comment.content %></blockquote>
       </div>
     </li>
