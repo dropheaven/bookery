@@ -44,7 +44,7 @@ const commentsCreator = commentsArray => {
       <li class="media">
         <div class="media-body">
         <span class="mt-0">${comment.username}</span>
-        <span></span>
+        <span class="post-time float-right">${comment.posted_at}</span>
         <blockquote>${comment.content}</blockquote>
         </div>
       </li>
