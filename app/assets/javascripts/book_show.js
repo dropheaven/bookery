@@ -15,15 +15,17 @@ document.addEventListener('turbolinks:load', () => {
   });
 
   const commentButton = document.querySelector('#comment-btn');
+  if (!commentButton) return;
 
   commentButton.addEventListener('click', (event) => {
     event.preventDefault();
     let commentContent =  document.querySelector('.new_comment').elements[3].value;
     const userId = document.querySelector('.new_comment').elements[2].value;
+    const bookId = document.querySelector('.btn.btn-success').dataset.book;
 
     fetch('/comments', {
       method: 'post',
-      body: JSON.stringify({ id: userId, content: commentContent }),
+      body: JSON.stringify({ id: userId, book_id: bookId, content: commentContent }),
       headers: {
         'Content-Type': 'application/json',
         'X-CSRF-Token': Rails.csrfToken()
