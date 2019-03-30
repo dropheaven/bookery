@@ -1,7 +1,6 @@
 <ul class="list-unstyled w-75">
-  <% @book.comments.each_with_index do |comment, idx| %>
+  <% @book.comments.each do |comment| %>
     <li class="media">
-      <img class="mr-3" src="" alt="">
       <div class="media-body">
         <span class="mt-0"><%= comment.user.username %></span>
         <span class="post-time float-right"><%= posted_on(comment) %></span>
