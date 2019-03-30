@@ -37,20 +37,21 @@ const updateBookDetails = json => {
 const commentsCreator = commentsArray => {
   const commentsList = document.querySelector('ul.list-unstyled');
   commentsList.innerHTML = "";
+  let commentBody = "";
 
   commentsArray.forEach(comment => {
-    const commentBody = `
+    commentBody += `
       <li class="media">
         <div class="media-body">
-        <span></span>
+        <span class="mt-0"></span>
         <span></span>
         <blockquote>${comment.content}</blockquote>
         </div>
       </li>
     `;
-
-    commentsList.innerHTML = commentBody; 
   });
+
+  commentsList.innerHTML = commentBody; 
 }
 
 
