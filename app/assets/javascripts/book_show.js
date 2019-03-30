@@ -26,7 +26,7 @@ class Book {
 
    titleize() {
     const titleized = [];
-    this.author.split(' ').forEach((name, idx) => {
+    this.author.split(' ').forEach((name) => {
       const splitFurther = name.split('');
       if (splitFurther.some(char => char === '.' || char === '-')) {
         let withIntials = "";
