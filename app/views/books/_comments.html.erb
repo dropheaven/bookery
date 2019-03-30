@@ -11,13 +11,16 @@
 </ul>
 
 
-<div class="container comment-form">
-  <%= form_for @book.comments.build do |f| %>
-    <%= f.hidden_field :id, value: @book.id %>
-    <%= f.text_area :content, placeholder: "Enter comment...", class: "form-control w-75" %><br>
-    <%= f.submit "Add comment", id: "comment-btn", class: "btn btn-primary" %>
-  <% end %>
-</div>
+<% if logged_in? %>
+  <div class="container comment-form">
+    <%= form_for @book.comments.build do |f| %>
+      <%= f.hidden_field :id, value: @book.id %>
+      <%= f.text_area :content, placeholder: "Enter comment...", class: "form-control w-75" %><br>
+      <%= f.submit "Add comment", id: "comment-btn", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+<% end %>
+
 
 
 
