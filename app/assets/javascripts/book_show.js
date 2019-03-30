@@ -45,9 +45,6 @@ document.addEventListener('turbolinks:load', () => {
           </li>
         `;
 
-        // const node = new DOMParser().parseFromString(makeComment, "text/xml");
-        
-        // debugger
         document.querySelector('ul.list-unstyled').innerHTML += makeComment;
         document.querySelector('.new_comment').elements[3].value = "";
       });
