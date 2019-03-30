@@ -1,17 +1,55 @@
 document.addEventListener('turbolinks:load', () => {  
-  const button = document.querySelector('.btn.btn-success');
-  if (!button) return; // not on book#show if this gets executed
+  const mbButton = document.querySelector('.btn.btn-success');
+  if (!mbButton) return; // not on book#show if this gets executed
 
-  button.addEventListener('click', event => {
-    const addOne = parseInt(button.dataset.book) + 1
-    const url = `/authors/${button.dataset.author}/books/${addOne}.json`;
+  mbButton.addEventListener('click', event => {
+    const addOne = parseInt(mbButton.dataset.book) + 1
+    const url = `/authors/${mbButton.dataset.author}/books/${addOne}.json`;
 
     fetch(url)
       .then(response => response.json())
       .then(book => {
         updateBookDetails(book);
-        button.dataset.book = addOne.toString();
+        mbButton.dataset.book = addOne.toString();
       });
+  });
+
+  const commentButton = document.querySelector('#comment-btn');
+
+  commentButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    let commentContent =  document.querySelector('.new_comment').elements[3].value;
+    const userId = document.querySelector('.new_comment').elements[2].value;
+
+    fetch('/comments', {
+      method: 'post',
+      body: JSON.stringify({ id: userId, content: commentContent }),
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': Rails.csrfToken()
+      },
+      credentials: 'same-origin'
+    })
+      .then(response => response.json())
+      .then(book => {
+        const comment = book.comments[book.comments.length - 1];
+        const makeComment = `
+          <li class="media">
+            <div class="media-body">
+            <span class="mt-0">${comment.username}</span>
+            <span class="post-time float-right">${comment.posted_at}</span>
+            <blockquote>${comment.content}</blockquote>
+            </div>
+          </li>
+        `;
+
+        // const node = new DOMParser().parseFromString(makeComment, "text/xml");
+        
+        // debugger
+        document.querySelector('ul.list-unstyled').innerHTML += makeComment;
+        document.querySelector('.new_comment').elements[3].value = "";
+      });
+
   });
 });
 
