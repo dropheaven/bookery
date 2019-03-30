@@ -43,7 +43,7 @@ const commentsCreator = commentsArray => {
     commentBody += `
       <li class="media">
         <div class="media-body">
-        <span class="mt-0"></span>
+        <span class="mt-0">${comment.username}</span>
         <span></span>
         <blockquote>${comment.content}</blockquote>
         </div>
