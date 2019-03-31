@@ -17,3 +17,5 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require book_show
+//= require book
+//= require comment
