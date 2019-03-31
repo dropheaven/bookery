@@ -42,32 +42,6 @@ document.addEventListener('turbolinks:load', () => {
   });
 });
 
-class Book {
-  constructor(title, releaseYear, author, genre, comments) {
-    this.title = title;
-    this.releaseYear = releaseYear;
-    this.author = author;
-    this.genre = genre;
-    this.comments = comments;
-  }
-
-   titleize() {
-    const titleized = [];
-    this.author.split(' ').forEach((name) => {
-      const splitFurther = name.split('');
-      if (splitFurther.some(char => char === '.' || char === '-')) {
-        let withIntials = "";
-        splitFurther.forEach(char => withIntials += char.toUpperCase());
-        titleized.push(withIntials);
-      } else {
-        titleized.push(name[0].toUpperCase() + name.slice(1).toLowerCase());
-      }
-    });
-
-    return titleized.join(' ');
-  }
-}
-
 const updateBookDetails = json => {
   const book = new Book(json.title, json.release_year, json.author.full_name, json.genre.name, json.comments);
   document.querySelector('h2').textContent = book.title;
@@ -89,12 +63,13 @@ const displayComments = commentsArray => {
   commentsList.innerHTML = commentBody; 
 };
 
-const makeComment = (comment) => {
+const makeComment = (commentObj) => {
+  const comment = new Comment(commentObj.username, commentObj.content, commentObj.posted_at);
   return `
     <li class="media">
       <div class="media-body">
       <span class="mt-0">${comment.username}</span>
-      <span class="post-time float-right">${comment.posted_at}</span>
+      <span class="post-time float-right">${comment.postedAt}</span>
       <blockquote>${comment.content}</blockquote>
       </div>
     </li>
