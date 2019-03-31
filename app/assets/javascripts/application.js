@@ -16,6 +16,6 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
-//= require book_show
+//= require main
 //= require book
 //= require comment
