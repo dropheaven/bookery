@@ -5,6 +5,14 @@ class AuthorsController < ApplicationController
     @authors = Author.all
   end
 
+  def show 
+    @author = Author.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.json { render json: @author }
+    end
+  end
+
   def new
   end
 
