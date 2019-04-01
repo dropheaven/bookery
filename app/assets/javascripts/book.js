@@ -24,6 +24,31 @@ class Book {
   }
 }
 
+const indexEventListener = () => {
+  const row = document.querySelector('.row.text-center');
+  if (!row) return;
+  
+  row.addEventListener('click', (e) => {
+    if(e.target.className === 'author-link') {
+      e.preventDefault();
+      
+      fetch(`/authors/${e.target.dataset.id}.json`)
+        .then(response => response.json())
+        .then(author => updateAuthorBooks(author));
+    }
+  });
+};
+
+const updateAuthorBooks = (authorObj) => {
+  const row = document.querySelector('.row.text-center');
+  row.innerHTML = "";
+
+  authorObj.books.forEach(b => {
+    const book = new Book(b.title, b.release_year, b.author_name, b.genre_name);
+    row.innerHTML += bookContainer(book);
+  });
+};
+
 const bookShowEventListener = () => {
   const mbButton = document.querySelector('.btn.btn-success');
   if (!mbButton) return; // not on book#show if this gets executed
@@ -42,6 +67,26 @@ const bookShowEventListener = () => {
 };
 
 /* helper functions */
+
+const bookContainer = book => {
+  return `
+    <div class="col-lg-3 col-md-6 mb-4">
+      <div class="card h-100">
+        <img class="card-img-top" src="/assets/books/book-2.jpg" width="253" height="177">
+        <div class="card-body">
+          <h4 class="card-title">${book.title}</h4>
+          <p class="card-text">
+            Author: ${book.titleize()}<br />
+            Genre: ${book.genre}<br />
+            Release year: ${book.releaseYear}
+          </p>
+        </div>
+        <div class="card-footer">
+        </div>
+      </div>
+    </div>
+  `
+};
 
 const updateBookDetails = json => {
   const book = new Book(json.title, json.release_year, json.author.full_name, json.genre.name, json.comments);
