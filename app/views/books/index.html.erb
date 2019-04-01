@@ -13,7 +13,7 @@
         <div class="card-body">
           <h4 class="card-title"><%= book.title %></h4>
           <p class="card-text">
-            Author: <%= link_to titleize(book.author), author_books_path(book.author) %><br />
+            Author: <%= link_to titleize(book.author), author_books_path(book.author), class: "author-link" %><br />
             Genre: <%= link_to book.genre.name, genre_path(book.genre_id) %><br />
             Release year: <%= link_to book.release_year, "#" %>
           </p>
