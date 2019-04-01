@@ -27,7 +27,7 @@ class Book {
 const indexEventListener = () => {
   const row = document.querySelector('.row.text-center');
   if (!row) return;
-  
+
   row.addEventListener('click', (e) => {
     if(e.target.className === 'author-link') {
       e.preventDefault();
@@ -40,6 +40,14 @@ const indexEventListener = () => {
 };
 
 const updateAuthorBooks = (authorObj) => {
+  const jumbotron = document.querySelector('.jumbotron');
+  jumbotron.innerHTML = "";
+  const h1 = `
+    <h1 class="display-5">${authorObj.full_name}</h1>
+    <p class="lead">${authorObj.bio}</p>
+  `;
+  jumbotron.innerHTML += h1;
+
   const row = document.querySelector('.row.text-center');
   row.innerHTML = "";
 
