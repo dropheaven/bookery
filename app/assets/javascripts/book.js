@@ -6,8 +6,7 @@ class Book {
     this.genre = genre;
     this.comments = comments;
   }
-
-   titleize() {
+  titleize() {
     const titleized = [];
     this.author.split(' ').forEach((name) => {
       const splitFurther = name.split('');
@@ -40,19 +39,20 @@ const indexEventListener = () => {
 };
 
 const updateAuthorBooks = (authorObj) => {
+  const author = new Author(authorObj.full_name, authorObj.bio, authorObj.books);
   const jumbotron = document.querySelector('.jumbotron');
   jumbotron.innerHTML = "";
   const h1 = `
-    <h1 class="display-5">${authorObj.full_name}</h1>
-    <p class="lead">${authorObj.bio}</p>
+    <h1 class="display-5">${author.titleize()}</h1>
+    <p class="lead">${author.bio}</p>
   `;
   jumbotron.innerHTML += h1;
 
   const row = document.querySelector('.row.text-center');
   row.innerHTML = "";
 
-  authorObj.books.forEach(b => {
-    const book = new Book(b.title, b.release_year, b.author_name, b.genre_name);
+  author.books.forEach(b => {
+    const book = new Book(b.title, b.release_year, author, b.genre_name);
     row.innerHTML += bookContainer(book);
   });
 };
@@ -84,7 +84,6 @@ const bookContainer = book => {
         <div class="card-body">
           <h4 class="card-title">${book.title}</h4>
           <p class="card-text">
-            Author: ${book.titleize()}<br />
             Genre: ${book.genre}<br />
             Release year: ${book.releaseYear}
           </p>
