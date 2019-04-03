@@ -6,6 +6,7 @@ class Book {
     this.genre = genre;
     this.comments = comments;
   }
+
   titleize() {
     const titleized = [];
     this.author.split(' ').forEach((name) => {
@@ -20,6 +21,10 @@ class Book {
     });
 
     return titleized.join(' ');
+  }
+
+  randomBookLink() {
+    return `/assets/books/book-${Math.floor(Math.random() * 11) + 1}.jpg`
   }
 }
 
@@ -55,6 +60,8 @@ const updateAuthorBooks = (authorObj) => {
     const book = new Book(b.title, b.release_year, author, b.genre_name);
     row.innerHTML += bookContainer(book);
   });
+
+  window.scrollTo(0, 0);
 };
 
 const bookShowEventListener = () => {
@@ -66,10 +73,21 @@ const bookShowEventListener = () => {
     const url = `/authors/${mbButton.dataset.author}/books/${addOne}.json`;
 
     fetch(url)
-      .then(response => response.json())
+      .then(response => {
+        if (response.ok){
+          return response.json();
+        } 
+        else {
+          // return Promise.reject('something went wrong!')
+        }
+      })
       .then(book => {
         updateBookDetails(book);
         mbButton.dataset.book = addOne.toString();
+      })
+      .catch(error => {
+        mbButton.style.visibility = "hidden";
+        document.querySelector('#book-info').innerHTML += `<h5>This is the last book in this author's collection</h5>`;
       });
   });
 };
@@ -80,7 +98,7 @@ const bookContainer = book => {
   return `
     <div class="col-lg-3 col-md-6 mb-4">
       <div class="card h-100">
-        <img class="card-img-top" src="/assets/books/book-2.jpg" width="253" height="177">
+        <img class="card-img-top" src=${book.randomBookLink()} width="253" height="177">
         <div class="card-body">
           <h4 class="card-title">${book.title}</h4>
           <p class="card-text">
