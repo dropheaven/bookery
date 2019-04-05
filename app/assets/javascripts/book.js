@@ -43,6 +43,29 @@ const indexEventListener = () => {
   });
 };
 
+const bookShowEventListener = () => {
+  const mbButton = document.querySelector('.btn.btn-success');
+  if (!mbButton) return; // not on book#show if this gets executed
+
+  mbButton.addEventListener('click', event => {
+    const addOne = parseInt(mbButton.dataset.book) + 1
+    const url = `/authors/${mbButton.dataset.author}/books/${addOne}.json`;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(book => {
+        updateBookDetails(book);
+        mbButton.dataset.book = addOne.toString();
+      })
+      .catch(error => {
+        mbButton.style.visibility = "hidden";
+        document.querySelector('#book-info').innerHTML += `<p>This is the last book in this author's collection</p>`;
+      });
+  });
+};
+
+/* helper functions */
+
 const updateAuthorBooks = (authorObj) => {
   const author = new Author(authorObj.full_name, authorObj.bio, authorObj.books);
   const jumbotron = document.querySelector('.jumbotron');
@@ -63,36 +86,6 @@ const updateAuthorBooks = (authorObj) => {
 
   window.scrollTo(0, 0);
 };
-
-const bookShowEventListener = () => {
-  const mbButton = document.querySelector('.btn.btn-success');
-  if (!mbButton) return; // not on book#show if this gets executed
-
-  mbButton.addEventListener('click', event => {
-    const addOne = parseInt(mbButton.dataset.book) + 1
-    const url = `/authors/${mbButton.dataset.author}/books/${addOne}.json`;
-
-    fetch(url)
-      .then(response => {
-        if (response.ok){
-          return response.json();
-        } 
-        else {
-          // return Promise.reject('something went wrong!')
-        }
-      })
-      .then(book => {
-        updateBookDetails(book);
-        mbButton.dataset.book = addOne.toString();
-      })
-      .catch(error => {
-        mbButton.style.visibility = "hidden";
-        document.querySelector('#book-info').innerHTML += `<h5>This is the last book in this author's collection</h5>`;
-      });
-  });
-};
-
-/* helper functions */
 
 const bookContainer = book => {
   return `
