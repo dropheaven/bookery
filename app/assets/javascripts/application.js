@@ -16,7 +16,6 @@
 //= require jquery3
 //= require popper
 //= require bootstrap-sprockets
-//= require author
-//= require comment
-//= require book
+//= require classes
 //= require main
+//= require call
