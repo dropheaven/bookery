@@ -8,7 +8,7 @@
   <% @books.each do |book| %>
     <div class="col-lg-3 col-md-6 mb-4">
       <div class="card h-100">
-        <%= image_tag "books/book-" + rand(1..11).to_s + ".jpg", size: "253x177", class: "card-img-top", alt: "" %>
+        <%= image_tag "books/book-" + rand(1..11).to_s + ".jpg", size: "200x150", class: "card-img-top", alt: "" %>
         <div class="card-body">
           <h4 class="card-title"><%= book.title %></h4>
           <p class="card-text">
