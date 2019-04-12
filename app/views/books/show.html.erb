@@ -3,7 +3,7 @@
     <%= image_tag "books/book-4.jpg", size: "200x300", class: "rounded float-left", alt: "hunter-newton" %>
   </div>
   <div id ="book-info" class="col-sm-10">
-    <h2><%= @book.title %></h2>
+    <h2 id= "book-title"><%= @book.title %></h2>
     <h5>by <%= titleize(@book.author) %></h5>
     <p>
       Genre: <span id="genre"><%= @book.genre.name %></span><br>
