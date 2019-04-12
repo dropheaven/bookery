@@ -1,3 +1,5 @@
+/*----------------------------------- go to Author's book index page from root -------------------------------------------------------------*/
+
 const authorBooks = () => {
   const row = document.querySelector('.row.text-center');
   if (!row) return;
@@ -6,66 +8,15 @@ const authorBooks = () => {
     if(e.target.className === 'author-link') {
       e.preventDefault();
       
-      fetch(`/authors/${e.target.dataset.id}.json`)
+      fetch(`/authors/${e.target.dataset.id}`)
         .then(response => response.json())
         .then(author => updateAuthorBooks(author));
     }
   });
 };
 
-const showBook = () => {
-  const mbButton = document.querySelector('.btn.btn-success');
-  if (!mbButton) return; // not on book#show if this gets executed
-
-  mbButton.addEventListener('click', event => {
-    const addOne = parseInt(mbButton.dataset.book) + 1
-    const url = `/authors/${mbButton.dataset.author}/books/${addOne}.json`;
-
-    fetch(url)
-      .then(response => response.json())
-      .then(book => {
-        updateBookDetails(book);
-        mbButton.dataset.book = addOne.toString();
-      })
-      .catch(error => {
-        mbButton.style.visibility = "hidden";
-        document.querySelector('#book-info').innerHTML += `<p>This is the last book in this author's collection</p>`;
-      });
-  });
-};
-
-const postComment = () => {
-  const commentButton = document.querySelector('#comment-btn');
-  if (!commentButton) return;
-  
-  commentButton.addEventListener('click', (event) => {
-    event.preventDefault();
-    let commentContent =  document.querySelector('.new_comment').elements[3].value;
-    const userId = document.querySelector('.new_comment').elements[2].value;
-    const bookId = document.querySelector('.btn.btn-success').dataset.book;
-
-    fetch('/comments', {
-      method: 'post',
-      body: JSON.stringify({ id: userId, book_id: bookId, content: commentContent }),
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRF-Token': Rails.csrfToken()
-      },
-      credentials: 'same-origin'
-    })
-      .then(response => response.json())
-      .then(book => {
-        const comment = makeComment(book.comments[book.comments.length - 1])
-        document.querySelector('ul.list-unstyled').innerHTML += comment;
-        document.querySelector('.new_comment').elements[3].value = "";
-      });
-  });
-};
-
-/* helper functions */
-
 const updateAuthorBooks = (authorObj) => {
-  const author = new Author(authorObj.full_name, authorObj.bio, authorObj.books);
+  const author = new Author(authorObj.id, authorObj.full_name, authorObj.bio, authorObj.books);
   const jumbotron = document.querySelector('.jumbotron');
   jumbotron.innerHTML = "";
   const h1 = `
@@ -104,12 +55,36 @@ const bookContainer = book => {
   `
 };
 
+/*-------------------------------------------------- get next book from show page of a book --------------------------------------------------*/
+
+const showBook = () => {
+  const mbButton = document.querySelector('.btn.btn-success');
+  if (!mbButton) return;
+
+  mbButton.addEventListener('click', event => {
+    const url = `/authors/${mbButton.dataset.author}`;
+    const title = document.querySelector('#book-title').innerHTML;
+    
+    fetch(url)
+      .then(response => response.json())
+      .then(author => {
+        const indexOfCurrentBook = author.books.findIndex(book => book.title === title);
+        updateBookDetails(author.books[indexOfCurrentBook + 1]);
+      })
+      .catch(error => {
+        mbButton.style.visibility = "hidden";
+        document.querySelector('#book-info').innerHTML += `<p>This is the last book in this author's collection.</p>`;
+      });
+  });
+};
+
 const updateBookDetails = json => {
-  const book = new Book(json.title, json.release_year, json.author.full_name, json.genre.name, json.comments);
+  const book = new Book(json.id, json.title, json.release_year, json.full_name, json.genre_name, json.comments);
   document.querySelector('h2').textContent = book.title;
   document.querySelector('#release').textContent = book.releaseYear;
-  document.querySelector('h5').textContent = `by ${book.titleize()}`;
+  document.querySelector('h5').textContent = `by ${book.title}`;
   document.querySelector('#genre').textContent = book.genre;
+  document.querySelector('.btn-success').dataset.book = book.id.toString();
   displayComments(book.comments);
 };
 
@@ -123,6 +98,36 @@ const displayComments = commentsArray => {
   });
 
   commentsList.innerHTML = commentBody; 
+};
+
+/* --------------------------------------------------------------- Post Comment ------------------------------------------------------------*/
+
+const postComment = () => {
+  const commentButton = document.querySelector('#comment-btn');
+  if (!commentButton) return;
+  
+  commentButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    let commentContent =  document.querySelector('.new_comment').elements[3].value;
+    const userId = document.querySelector('.new_comment').elements[2].value;
+    const bookId = document.querySelector('.btn-success').dataset.book;
+
+    fetch('/comments', {
+      method: 'post',
+      body: JSON.stringify({ id: userId, book_id: bookId, content: commentContent }),
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': Rails.csrfToken()
+      },
+      credentials: 'same-origin'
+    })
+      .then(response => response.json())
+      .then(book => {
+        const comment = makeComment(book.comments[book.comments.length - 1])
+        document.querySelector('ul.list-unstyled').innerHTML += comment;
+        document.querySelector('.new_comment').elements[3].value = "";
+      });
+  });
 };
 
 const makeComment = (commentObj) => {
