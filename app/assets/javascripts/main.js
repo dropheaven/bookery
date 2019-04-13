@@ -18,17 +18,14 @@ const authorBooks = () => {
 const updateAuthorBooks = (authorObj) => {
   const author = new Author(authorObj.id, authorObj.full_name, authorObj.bio, authorObj.books);
   const jumbotron = document.querySelector('.jumbotron');
-  jumbotron.innerHTML = "";
-  const h1 = `
+  jumbotron.innerHTML = `
     <h1 class="display-5">${author.titleize()}</h1>
     <p class="lead">${author.bio}</p>
     <button id="assort">Sort books by title</button>
   `;
-  jumbotron.innerHTML += h1;
 
   const row = document.querySelector('.row.text-center');
   row.innerHTML = "";
-
   author.books.forEach(b => {
     const book = new Book(b.id, b.title, b.release_year, author, b.genre_name);
     row.innerHTML += bookContainer(book);
