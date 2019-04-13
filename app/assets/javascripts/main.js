@@ -22,6 +22,7 @@ const updateAuthorBooks = (authorObj) => {
   const h1 = `
     <h1 class="display-5">${author.titleize()}</h1>
     <p class="lead">${author.bio}</p>
+    <button id="assort">Sort books by title</button>
   `;
   jumbotron.innerHTML += h1;
 
@@ -29,11 +30,12 @@ const updateAuthorBooks = (authorObj) => {
   row.innerHTML = "";
 
   author.books.forEach(b => {
-    const book = new Book(b.title, b.release_year, author, b.genre_name);
+    const book = new Book(b.id, b.title, b.release_year, author, b.genre_name);
     row.innerHTML += bookContainer(book);
   });
 
   window.scrollTo(0, 0);
+  assortBooks(author);
 };
 
 const bookContainer = book => {
@@ -53,6 +55,21 @@ const bookContainer = book => {
       </div>
     </div>
   `
+};
+
+/*------------------------------------------------------------- sort books by title -------------------------------------------------------*/
+
+const assortBooks = (author) => {
+  document.querySelector('#assort').addEventListener('click', (e) => {
+    const row = document.querySelector('.row.text-center');
+    row.innerHTML = '';
+
+    const books = author.books.sort((a, b) => a.title > b.title ? 1 : -1);
+    books.forEach(b => {
+      const book = new Book(b.id, b.title, b.release_year, author, b.genre_name);
+      row.innerHTML += bookContainer(book);
+    });
+  });
 };
 
 /*-------------------------------------------------- get next book from show page of a book --------------------------------------------------*/
